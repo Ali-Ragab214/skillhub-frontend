@@ -1,0 +1,145 @@
+
+/home/ali/projects/course_pilot/coursepilot/src/pages/instructor/CourseContent/index.jsx
+  29:9  error    'navigate' is assigned a value but never used                                                                 no-unused-vars
+  58:6  warning  React Hook useEffect has a missing dependency: 'fetchData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+/home/ali/projects/course_pilot/coursepilot/src/pages/instructor/Profile/index.jsx
+  14:7  error    Error: Cannot access variable before it is declared
+
+`fetchProfile` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+  12 |   useEffect(() => {
+  13 |     if (user?.id) {
+> 14 |       fetchProfile();
+     |       ^^^^^^^^^^^^ `fetchProfile` accessed before it is declared
+  15 |     }
+  16 |   }, []);
+  17 |
+
+  16 |   }, []);
+  17 |
+> 18 |   async function fetchProfile() {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 19 |     try {
+     | ^^^^^^^^^
+> 20 |       const res = await getUserById(user.id);
+     | ^^^^^^^^^
+> 21 |       setProfile(res.data);
+     | ^^^^^^^^^
+> 22 |     } catch {
+     | ^^^^^^^^^
+> 23 |       setProfile(user);
+     | ^^^^^^^^^
+> 24 |     } finally {
+     | ^^^^^^^^^
+> 25 |       setLoading(false);
+     | ^^^^^^^^^
+> 26 |     }
+     | ^^^^^^^^^
+> 27 |   }
+     | ^^^^ `fetchProfile` is declared here
+  28 |
+  29 |   if (loading) return <Spinner size="lg" className="py-20" />;
+  30 |  react-hooks/immutability
+  16:6  warning  React Hook useEffect has missing dependencies: 'fetchProfile' and 'user?.id'. Either include them or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           react-hooks/exhaustive-deps
+
+/home/ali/projects/course_pilot/coursepilot/src/pages/student/CourseDetails/index.jsx
+   29:18  error    'setCourse' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      no-unused-vars
+   30:20  error    'setSections' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    no-unused-vars
+   47:7   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  45 |   useEffect(() => {
+  46 |     if (!token || !user) {
+> 47 |       setLoadingStatus(false);
+     |       ^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  48 |       return;
+  49 |     }
+  50 |     checkStatus();  react-hooks/set-state-in-effect
+   50:5   error    Error: Cannot access variable before it is declared
+
+`checkStatus` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+  48 |       return;
+  49 |     }
+> 50 |     checkStatus();
+     |     ^^^^^^^^^^^ `checkStatus` accessed before it is declared
+  51 |   }, []);
+  52 |
+  53 |   async function checkStatus() {
+
+  51 |   }, []);
+  52 |
+> 53 |   async function checkStatus() {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 54 |     try {
+     | ^^^^^^^^^
+> 55 |       const statusRes = await axiosInstance.get(`/api/enrollments/${course.id}/status`);
+     …
+     | ^^^^^^^^^
+> 77 |     }
+     | ^^^^^^^^^
+> 78 |   }
+     | ^^^^ `checkStatus` is declared here
+  79 |
+  80 |   const handleEnroll = async () => {
+  81 |     if (!token) {                                                                                                                                        react-hooks/immutability
+   51:6   warning  React Hook useEffect has missing dependencies: 'checkStatus', 'token', and 'user'. Either include them or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               react-hooks/exhaustive-deps
+  156:9   error    'allLessons' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     no-unused-vars
+
+/home/ali/projects/course_pilot/coursepilot/src/pages/student/LessonViewer/index.jsx
+   1:20  error  'useEffect' is defined but never used            no-unused-vars
+  40:11  error  'user' is assigned a value but never used        no-unused-vars
+  65:9   error  'prevLesson' is assigned a value but never used  no-unused-vars
+  66:9   error  'nextLesson' is assigned a value but never used  no-unused-vars
+
+/home/ali/projects/course_pilot/coursepilot/src/pages/student/LessonViewer/loader.js
+  4:21  error  'lessonId' is assigned a value but never used  no-unused-vars
+
+/home/ali/projects/course_pilot/coursepilot/src/pages/student/Profile/index.jsx
+  14:7  error    Error: Cannot access variable before it is declared
+
+`fetchProfile` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+  12 |   useEffect(() => {
+  13 |     if (user?.id) {
+> 14 |       fetchProfile();
+     |       ^^^^^^^^^^^^ `fetchProfile` accessed before it is declared
+  15 |     }
+  16 |   }, []);
+  17 |
+
+  16 |   }, []);
+  17 |
+> 18 |   async function fetchProfile() {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 19 |     try {
+     | ^^^^^^^^^
+> 20 |       const res = await getUserById(user.id);
+     | ^^^^^^^^^
+> 21 |       setProfile(res.data);
+     | ^^^^^^^^^
+> 22 |     } catch {
+     | ^^^^^^^^^
+> 23 |       setProfile(user);
+     | ^^^^^^^^^
+> 24 |     } finally {
+     | ^^^^^^^^^
+> 25 |       setLoading(false);
+     | ^^^^^^^^^
+> 26 |     }
+     | ^^^^^^^^^
+> 27 |   }
+     | ^^^^ `fetchProfile` is declared here
+  28 |
+  29 |   if (loading) return <Spinner size="lg" className="py-20" />;
+  30 |  react-hooks/immutability
+  16:6  warning  React Hook useEffect has missing dependencies: 'fetchProfile' and 'user?.id'. Either include them or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           react-hooks/exhaustive-deps
+
+✖ 17 problems (13 errors, 4 warnings)
+
